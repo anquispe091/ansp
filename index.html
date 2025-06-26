@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Query Param Demo</title>
+</head>
+<body>
+  <h1>Loading...</h1>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const user = params.get("user") || "Guest";
+    const mode = params.get("mode") || "light";
+
+    document.body.innerHTML = `<h1>Hello, ${user}</h1><p>Mode: ${mode}</p>`;
+  </script>
+</body>
+</html>
