@@ -1,16 +1,113 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="fa" dir="rtl">
 <head>
-  <title>Query Param Demo</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>پرداخت موفق</title>
+  <meta name="color-scheme" content="dark light">
+  <style>
+    :root{
+      --bg: #0c1f2e;         /* dark navy */
+      --muted: #cbd5e1;      /* slate-300 */
+      --accent: #2fbf93;     /* teal/green circle */
+      --card: #0f2536;       /* slightly lighter than bg */
+      --ring: rgba(255,255,255,.08);
+    }
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Noto Naskh Arabic UI","Noto Sans Arabic","Tahoma", sans-serif;
+      display:flex; align-items:center; justify-content:center;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    main{ text-align:center; padding:40px 20px; max-width:720px; }
+    .icon{
+      width:120px; height:120px; margin:0 auto 24px;
+      background:var(--accent); border-radius:999px;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 12px 36px rgba(0,0,0,.30), inset 0 0 0 8px var(--ring);
+    }
+    .icon svg{ width:56px; height:56px; stroke:#fff; stroke-width:8; fill:none;
+               stroke-linecap:round; stroke-linejoin:round; }
+    h1{ margin:12px 0 8px; font-size:clamp(22px, 3.5vw, 36px); font-weight:800; }
+    p.lead{ margin:0 0 8px; font-size:clamp(14px, 2.2vw, 18px); color:var(--muted); }
+    .btn{
+      display:inline-block; margin-top:22px; padding:10px 16px; border-radius:10px;
+      border:1px solid rgba(255,255,255,.2); color:#fff; text-decoration:none;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.0));
+    }
+    .btn:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+    .sub{ margin-top:18px; font-size:12px; color:#9fb1c6; }
+    .details{
+      margin:26px auto 0; text-align:right; direction:rtl;
+      background:var(--card); border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; padding:14px 16px; max-width:560px;
+    }
+    .row{ display:flex; gap:10px; padding:6px 0; border-bottom:1px solid rgba(255,255,255,.06); }
+    .row:last-child{ border-bottom:none; }
+    .key{ color:#9fb1c6; min-width:120px; }
+    .val{ color:#fff; }
+    code{ background:rgba(0,0,0,.25); padding:2px 6px; border-radius:6px; direction:ltr; }
+    footer{ margin-top:28px; color:#94a3b8; font-size:12px; }
+  </style>
 </head>
 <body>
-  <h1>Loading...</h1>
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const user = params.get("user") || "Guest";
-    const mode = params.get("mode") || "light";
+  <main role="main" aria-live="polite">
+    <div class="icon" aria-hidden="true">
+      <!-- Checkmark -->
+      <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+        <path d="M12 25l9 9 15-20"/>
+      </svg>
+    </div>
 
-    document.body.innerHTML = `<h1>Hello, ${user}</h1><p>Mode: ${mode}</p>`;
-  </script>
+    <h1>پرداخت شما با موفقیت انجام شد</h1>
+    <p class="lead">اطلاعات خرید شما روی ربات شما برای شما ارسال می‌شود.</p>
+
+    <a class="btn" href="/" id="homeLink">بازگشت</a>
+
+    <!-- Optional order details (shown if query params are present) -->
+    <!-- <section id="details" class="details" hidden>
+      <div class="row"><div class="key">شماره سفارش</div><div class="val"><code id="orderId"></code></div></div>
+      <div class="row"><div class="key">مبلغ</div><div class="val"><code id="price"></code></div></div>
+      <div class="row"><div class="key">تاریخ پرداخت</div><div class="val"><code id="payDate"></code></div></div>
+      <div class="row"><div class="key">کد پیگیری</div><div class="val"><code id="refId"></code></div></div>
+      <div class="row"><div class="key">توکن</div><div class="val"><code id="token"></code></div></div>
+      <div class="row"><div class="key">وضعیت</div><div class="val"><code id="status"></code></div></div>
+    </section>
+
+    <footer id="ts"></footer> -->
+  </main>
+
+  <!-- <script>
+    // Show timestamp (local Persian if available)
+    const ts = document.getElementById('ts');
+    try { ts.textContent = new Date().toLocaleString('fa-IR'); } catch(e) { ts.textContent = new Date().toLocaleString(); }
+
+    // If the URL has known query params, reveal a details box
+    const q = new URLSearchParams(location.search);
+    const map = {
+      order_id: 'orderId',
+      price: 'price',
+      pay_date: 'payDate',
+      RefID: 'refId',
+      token: 'token',
+      status: 'status'
+    };
+    let any = false;
+    for (const [k, id] of Object.entries(map)) {
+      const v = q.get(k);
+      if (v !== null && v !== '') {
+        document.getElementById(id).textContent = v;
+        any = true;
+      }
+    }
+    if (any) document.getElementById('details').hidden = false;
+
+    // If you host this under a subpath, you can set the homeLink dynamically:
+    // document.getElementById('homeLink').setAttribute('href', q.get('return') || '/');
+  </script> -->
 </body>
 </html>
